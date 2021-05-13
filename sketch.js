@@ -1,5 +1,3 @@
-// global scope
-
 // variable for the various aspects of my program (buttons, embedded widgets, etc.)
 var fancyComponents;
 
@@ -26,7 +24,6 @@ var tracks = ['<iframe src="https://open.spotify.com/embed/track/1UBp6NPWRYWEqvR
 // <--- Skill 2
 
 function setup() {
-  // anything here will happen one time only
 
 	// the canvas/background is a semi-transparent black by default
 	canvasBG = color(0, 0, 0, 230);
@@ -39,7 +36,6 @@ function setup() {
 }
 
 function draw () {
-//anything here runs repeatedly
 
 	// since the canvas/background color changes depending on the mode selection, the background must be constantly reset
 	background(canvasBG);
