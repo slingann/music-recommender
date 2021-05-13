@@ -1,9 +1,3 @@
-// to do:
-	// add to albums & tracks
-	// ADD COMMENTS -
-	// change accent color? - 
-	// change button sizes -
-
 // global scope
 
 // variable for the various aspects of my program (buttons, embedded widgets, etc.)
