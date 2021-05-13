@@ -1,2 +1,2 @@
 # spotify-recommender
-project-link file has a url to the project!
+a program i created for c4cc that recommends songs and albums i like using spotify embedded widgets
