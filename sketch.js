@@ -1,3 +1,5 @@
+// global scope
+
 // variable for the various aspects of my program (buttons, embedded widgets, etc.)
 var fancyComponents;
 
@@ -5,8 +7,11 @@ var fancyComponents;
 var canvasBG;
 
 // variables for the color-changing square in the middle of my program, the color of the square changes based on these variables' values
-var gradientVarA = 150;
-var gradientVarB = 40;
+var i;
+var colorChange;
+
+// array for the colors that the square can be filled with
+var colors = [];
 
 // Skill 0, DATA STRUCTURES --->
 // array that holds all of the albums & song recommendatin users get
@@ -24,6 +29,14 @@ var tracks = ['<iframe src="https://open.spotify.com/embed/track/1UBp6NPWRYWEqvR
 // <--- Skill 2
 
 function setup() {
+  // anything here will happen one time only
+
+	// initializing i and colorChange as 0 so colors don't change until colorChange is 1 and the colors start changing with the first color in the colors array
+	i = 0;
+	colorChange = 0;
+
+	// the array for the colors of the middle square, a new color is called each time the draw function runs using index values
+	colors = [color(255, 0, 0), color(255, 69, 0), color(255, 140, 0), color(255, 165, 0), color(255, 215, 0), color(255, 255, 0), color(173, 255, 47), color(127, 255, 0), color(0, 255, 0), color(0, 255, 255), color(0, 191, 255), color(0, 0, 255), color(138, 43, 226), color(148, 0, 211), color(255, 0, 255), color(199, 21, 133), color(255, 20, 147), color(220, 20, 60)];
 
 	// the canvas/background is a semi-transparent black by default
 	canvasBG = color(0, 0, 0, 230);
@@ -36,18 +49,26 @@ function setup() {
 }
 
 function draw () {
+//anything here runs repeatedly
 
 	// since the canvas/background color changes depending on the mode selection, the background must be constantly reset
 	background(canvasBG);
-
-	// function that causes the square in the middle to change colors
-	fancyComponents.colorChange();
 
 	// function that creates the text and middle square
 	fancyComponents.textSymbols();
 
 	// function that creates the mode & recommendation buttons
 	fancyComponents.buttons();
+
+	// frame rate makes sure the colors don't flash or change too quickly
+	frameRate(5);
+	
+	// the value of i changes every time the draw function runs
+	if(i < colors.length - 1){
+		i++;
+	} else {
+		i = 0;
+	}
 }
 
 function keyPressed(){
@@ -61,6 +82,11 @@ function keyPressed(){
 		recommendations.pop();
 	}
 	// <--- Skill 3
+
+	if(keyCode === 67){
+		// tells program to change the square's color as colorChange equals 1
+		colorChange = 1;
+	}
 }
 
 
@@ -77,7 +103,7 @@ class FancyComponents {
 		this.instructionsColor = color(255);
 
 		// the color of the middle square, changes based on variables initialized in the global scope
-		this.accentColor;
+		this.accentColor = color(60, 179, 113);
 
 		// variable that gets random album recommendations
 		this.i = 0;
@@ -102,10 +128,17 @@ class FancyComponents {
 		textSize(width / 80);
 		text("Looks best if opened in a new tab!", this.xCenter, height / 6.25);
 
-		// color-changing middle square
-		fill(this.accentColor);
+		// Skill 5, DYNAMIC VISUALS or CONDITIONAL LOGIC --->
+		// the color of the middle square changes based on the values of colorChange and i
+		// Niki recommended that I make the middle square change colors to add some spice and ~pizazz~ to my program
+		if(colorChange == 1){
+			fill(colors[i]);
+		} else {
+			fill(this.accentColor);
+		}
 		rectMode(CENTER);
 		rect(width/2, height/2 + 10, width/3.25, width/3.25, 15);
+		// <--- Skill 5
 
 		// instructions	
 		fill(this.instructionsColor);
@@ -113,28 +146,7 @@ class FancyComponents {
 		text("Click either of the buttons below \n to be recommended an album \n or a track/song that I like! \n \n All of the albums and songs \n can be listened to on Spotify. \n You can also play them through \n the embedded widget!", this.xCenter, height / 2.4);
 
 		fill(this.textColor);
-		text("Press the spacebar to undo the recommendation or see the previous recommendation.", this.xCenter, height * 16/17);
-	}
-
-	colorChange(){
-		// Niki recommended that I make the middle square change colors this way
-		
-		// Skill 5, DYNAMIC VISUALS or CONDITIONAL LOGIC --->
-		// color of middle square changes based on the values of the variables gradientA and gradientB
-		if(gradientVarA < 480){
-    	this.accentColor = color(gradientVarA - 280, gradientVarB / 3, gradientVarA - 200 + gradientVarB / 3);
-			// value of variables increase by one each time the code is run, causing the square's color to change
-    	gradientVarA++;
-    	gradientVarB++;
-  	} else if(gradientVarA == 480){
-			// resets the color back to the initial dark/blackish green
-    	gradientVarA = 150;
-    	gradientVarB = 40;
-    	if(gradientVarB == 600){
-      	gradientVarB = 120;
-    	}
-  	}
-		// <--- Skill 5
+		text('Press the spacebar to undo the recommendation or see the previous recommendation. \n Press the "C" key to see the square above flash or change colors!', this.xCenter, height * 16/17);
 	}
 
 	buttons(){
@@ -177,6 +189,8 @@ class FancyComponents {
 		// gets a random integer between 0 and the length of the albums array
 		this.i = floor(random(albums.length));
 
+		// used https://editor.p5js.org/Zipexpo/sketches/Ue0gG-r6l as reference for this.embedded functions
+
 		// sets an area/divider and position for the embedded widget
 		this.embedded = createDiv('').size(windowWidth, windowHeight);
 		this.embedded.position(width / 2 - 85, height / 2 - 70);
@@ -196,6 +210,8 @@ class FancyComponents {
 		// the track recommendation changes based on the value of this.j
 		// gets a random integer between 0 and the length of the tracks array
 		this.j = floor(random(tracks.length));
+
+		// used https://editor.p5js.org/Zipexpo/sketches/Ue0gG-r6l as reference for this.embedded functions
 
 		// sets an area/divider and position for the embedded widget
 		this.embedded = createDiv('').size(windowWidth, windowHeight);
