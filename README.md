@@ -1,2 +1,2 @@
 # spotify-recommender
-a program i created that recommends songs and albums i like using spotify embedded widgets
+A program I created that recommends songs and albums I like using Spotify embedded widgets.
