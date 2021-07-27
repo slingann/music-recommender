@@ -1,3 +1,5 @@
+// global scope
+
 // variable for the various aspects of my program (buttons, embedded widgets, etc.)
 var fancyComponents;
 
