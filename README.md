@@ -7,7 +7,6 @@ This is my final project for the CS49 (Foundations of Computer Science) course. 
 I listen to music on Spotify very often. I enjoy playing music when I'm doing homework, coding, getting chores done, etc., and wanted to recommend some of my favorite songs and albums to my peers and instructors from CS49.
 
 ### 🛠 Made With
-- Replit (IDE)
-- JavaScript (p5.js)
+`Replit (IDE)` `JavaScript (p5.js)`
 
 ### 📃 [Project Instructions](https://docs.google.com/document/d/1e2wWJA-5n8ObvyVMogOH2bBL8_rMI_f8ObJcvuzkdvo/edit)
