@@ -124,9 +124,9 @@ class FancyComponents {
 		text("Samiksha's Music Recommmender", this.xCenter, height / 8);
 		
 		// tip for viewing the program
-		textStyle(ITALIC);
-		textSize(width / 80);
-		text("Looks best if opened in a new tab!", this.xCenter, height / 6.25);
+		// textStyle(ITALIC);
+		// textSize(width / 80);
+		// text("Looks best if opened in a new tab!", this.xCenter, height / 6.25);
 
 		// Skill 5, DYNAMIC VISUALS or CONDITIONAL LOGIC --->
 		// the color of the middle square changes based on the values of colorChange and i
